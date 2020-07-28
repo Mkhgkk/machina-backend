@@ -22,7 +22,7 @@ function validateManufucturer(manufucturer) {
         description: Joi.string(),
         website: Joi.string(),
         contacts: Joi.array().items(Joi.string()),
-        eamil: Joi.array().items(Joi.string())
+        email: Joi.array().items(Joi.string())
     }
 
     return Joi.validate(manufucturer, schema);

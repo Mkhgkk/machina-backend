@@ -20,7 +20,7 @@ const machineSchema = new mongoose.Schema({
         type: [String],
         enum: ['Construction', 'Agriculture and Farming', 'Mining', 'Fishig', 'Packaging and Processing', 'Manufucturing', 'Accessories']
     },
-    manafucturer: {
+    manufucturer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Manufucturer"
     },
@@ -46,9 +46,9 @@ function validateMachine(machine) {
         title: Joi.string().required(),
         images: Joi.array().items(Joi.string()),
         description: Joi.string(),
-        manafucturer: Joi.objectId(),
+        manufucturer: Joi.objectId(),
         minimumQuantity: Joi.number(),
-        option: Joi.array().items(nestedSchema)
+        options: Joi.array().items(nestedSchema)
     }
 
     return Joi.validate(machine, schema)
