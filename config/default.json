@@ -1,0 +1,5 @@
+{
+  "jwtPrivateKey": "unSecureKey",
+  "db": "mongodb://localhost/machina",
+  "port": "3900"
+}
