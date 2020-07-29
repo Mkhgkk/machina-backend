@@ -28,7 +28,7 @@ router.post("/", auth, async (req, res) => {
   });
 
   if (manufucturer)
-    return res.status(400).send("Manufucturer with name alreasy exists");
+    return res.status(400).send("Manufucturer with name already exists");
 
   manufucturer = new Manufucturer({
     name: req.body.name,

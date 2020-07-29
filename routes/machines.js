@@ -13,7 +13,7 @@ router.get("/", auth, async (req, res) => {
     res.send(machines);
 });
 
-router.get(":/id", auth, async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
     const machine = await (await Machine.findOne({ _id: req.params.id })).isSelected("-__v");
 
     res.send(machine);
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
         title: req.body.title
     });
 
-    if (machine) return res.status(400).send("Machine with name alreasy exists");
+    if (machine) return res.status(400).send("Machine with name already exists");
 
     machine = new Machine({
         title: req.body.title,
