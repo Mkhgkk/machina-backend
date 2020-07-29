@@ -14,7 +14,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 router.get(":/id", auth, async (req, res) => {
-    const manufucturer = await (await Manufucturer.findOne({ _id: req.params.id })).isSelected("-__v");
+    const manufucturer = await Manufucturer.findOne({ _id: req.params.id }).isSelected("-__v");
 
     res.send(manufucturer);
 });
