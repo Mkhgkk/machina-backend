@@ -4,26 +4,33 @@ const router = express.Router();
 const config = require("config");
 const upload = require("../middleware/fileUpload");
 
-router.post("/", upload.array('images', 20), (req, res) => {
-    if (!req.files) {
+router.post("/", upload.single('images'), (req, res) => {
+    if (!req.file) {
         return res.status(401).send("No file received");
 
     } else {
 
-        let result = []
+        const filePath = req.protocol +
+            "://" +
+            req.hostname +
+            `:${config.get("port")}` +
+            "/images/" +
+            file.filename
 
-        req.files.forEach((file) => {
-            result.push(
-                req.protocol +
-                "://" +
-                req.hostname +
-                `:${config.get("port")}` +
-                "/images/" +
-                file.filename
-            );
-        });
+        // let result = []
 
-        return res.send(result)
+        // req.files.forEach((file) => {
+        //     result.push(
+        //         req.protocol +
+        //         "://" +
+        //         req.hostname +
+        //         `:${config.get("port")}` +
+        //         "/images/" +
+        //         file.filename
+        //     );
+        // });
+
+        return res.send(filePath)
     }
 })
 
