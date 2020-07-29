@@ -5,6 +5,12 @@ const auth = require("../middleware/auth");
 const validateObjectId = require("../middleware/validateObjectIds");
 const admin = require("../middleware/admin");
 
+router.get("/selector/", async (req, res) => {
+  const manufucturers = await Manufucturer.find().select("name").sort("name");
+
+  res.send(manufucturers);
+});
+
 router.get("/", auth, async (req, res) => {
   const manufucturer = await Manufucturer.find().select("-__v").sort("name");
 
