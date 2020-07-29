@@ -25,16 +25,18 @@ router.post("/", auth, async (req, res) => {
 
     let manufucturer = await Manufucturer.findOne({
         name: req.body.name,
+    });
+
+    if (manufucturer) return res.status(400).send("Manufucturer with name alreasy exists");
+
+    manufucturer = new Manufucturer({
+        name: req.body.name,
         address: req.body.address,
         description: req.body.description,
         website: req.body.website,
         contacts: req.body.contacts,
         email: req.body.email
     });
-
-    if (manufucturer) return res.status(400).send("Manufucturer with name alreasy exists");
-
-    manufucturer = new Manufucturer({ name: req.body.name });
 
     manufucturer = await manufucturer.save();
 
@@ -56,7 +58,7 @@ router.put("/:id", auth, async (req, res) => {
         payload[key] = req.body[key];
     }
 
-    const manufucturer = await Manufucturer.findByIdAndUpdate(req.body._id, payload, {
+    const manufucturer = await Manufucturer.findByIdAndUpdate(req.params.id, payload, {
         new: true
     });
 
