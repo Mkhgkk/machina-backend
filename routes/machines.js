@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
         title: req.body.title
     });
 
-    if (machine) return res.status(400).send("Machine with name alreasy exists");
+    if (machine) return res.status(400).send("Machine with name already exists");
 
     machine = new Machine({
         title: req.body.title,
