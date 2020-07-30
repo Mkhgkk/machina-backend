@@ -6,15 +6,18 @@ const validateObjectId = require("../middleware/validateObjectIds");
 const admin = require("../middleware/admin");
 
 router.get("/", auth, async (req, res) => {
-  const machines = await Machine.find().select("-__v").sort("title");
+  const machines = await Machine.find()
+    .select("-__v -images")
+    .sort("title")
+    .populate({ path: "manufucturer", select: "name" });
 
   res.send(machines);
 });
 
 router.get("/:id", auth, async (req, res) => {
-  const machine = await (await Machine.findOne({ _id: req.params.id })).select(
-    "-__v"
-  );
+  const machine = await Machine.findOne({ _id: req.params.id })
+    .select("-__v")
+    .populate({ path: "manufucturer", select: "name" });
 
   res.send(machine);
 });
@@ -31,7 +34,7 @@ router.post("/", async (req, res) => {
 
   machine = new Machine({
     title: req.body.title,
-    imges: req.body.images,
+    images: req.body.images,
     description: req.body.description,
     link: req.body.link,
     category: req.body.category,

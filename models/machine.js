@@ -17,7 +17,7 @@ const machineSchema = new mongoose.Schema({
   description: String,
   link: String,
   category: {
-    type: [String],
+    type: String,
     enum: [
       "Construction",
       "Agriculture and Farming",
@@ -47,6 +47,7 @@ function validateMachine(machine) {
     material: Joi.string(),
     isSecondHand: Joi.boolean(),
     warranty: Joi.number(),
+    _id: Joi.objectId(),
   });
   const schema = {
     title: Joi.string().required(),
