@@ -2,6 +2,11 @@ const express = require("express");
 const config = require("config");
 const app = express();
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 require("./startup/cors")(app);
 require("./startup/routes")(app);
 require("./startup/db")();
